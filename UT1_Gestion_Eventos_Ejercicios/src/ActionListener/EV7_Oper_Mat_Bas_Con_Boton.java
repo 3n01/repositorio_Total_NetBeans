@@ -27,9 +27,9 @@ public class EV7_Oper_Mat_Bas_Con_Boton extends JFrame implements ActionListener
     public EV7_Oper_Mat_Bas_Con_Boton()
     {
         super("");
-        this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       
+        // this.setSize(400,400);
+        this.setLayout(null);
 
         //Añadir GridLayout
         GridLayout admin = new GridLayout(5, 1);
@@ -53,16 +53,14 @@ public class EV7_Oper_Mat_Bas_Con_Boton extends JFrame implements ActionListener
     //Método que crea la fila 1
     public void creaFila1()
     {
-        FlowLayout admin = new FlowLayout();
-        JPanel panel = new JPanel();
-        panel.setLayout(admin);
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         //Crear la primera label
         labOp1 = new JLabel("Operando 1");
         panel.add(labOp1);
 
         //Crear el 1 textfiel
-        tfOp1 = new JTextField(10);
+        tfOp1 = new JTextField(5);
         panel.add(tfOp1);
 
         //Añadir el panel
@@ -74,14 +72,12 @@ public class EV7_Oper_Mat_Bas_Con_Boton extends JFrame implements ActionListener
     public void creaFila2()
     {
 
-        FlowLayout admin = new FlowLayout();
-        JPanel panel = new JPanel();
-        panel.setLayout(admin);
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         labOp2 = new JLabel("Operando 2");
-        panel.add(labOp1);
+        panel.add(labOp2);
 
-        tfOp2 = new JTextField(10);
+        tfOp2 = new JTextField(5);
         panel.add(tfOp2);
 
         //Añadir el panel
@@ -92,9 +88,7 @@ public class EV7_Oper_Mat_Bas_Con_Boton extends JFrame implements ActionListener
     //Método que crea la fila 3
     public void creaFila3()
     {
-        FlowLayout admin = new FlowLayout();
-        JPanel panel = new JPanel();
-        panel.setLayout(admin);
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         //Crear el radiobutton 1
         rbSuma = new JRadioButton("Suma", true);
@@ -125,9 +119,7 @@ public class EV7_Oper_Mat_Bas_Con_Boton extends JFrame implements ActionListener
     public void creaFila4()
     {
 
-        FlowLayout admin = new FlowLayout();
-        JPanel panel = new JPanel();
-        panel.setLayout(admin);
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         //Crear el botón
         btnSumar = new JButton("Operar");
@@ -142,9 +134,7 @@ public class EV7_Oper_Mat_Bas_Con_Boton extends JFrame implements ActionListener
     public void creaFila5()
     {
 
-        FlowLayout admin = new FlowLayout();
-        JPanel panel = new JPanel();
-        panel.setLayout(admin);
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         labResul = new JLabel("Resultado");
         panel.add(labResul);
@@ -160,33 +150,24 @@ public class EV7_Oper_Mat_Bas_Con_Boton extends JFrame implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        String modo = e.getActionCommand();
-
-        switch (modo)
+        float operando1 = Float.parseFloat(tfOp1.getText());
+        float operando2 = Float.parseFloat(tfOp2.getText());
+        if (rbSuma.isSelected())
         {
-            case "s":
-                operacion = true;
-                break;
-
-            case "r":
-                operacion = false;
-                break;
-
-            case "o":
-                int a = Integer.parseInt(tfOp1.getText());
-                int b = Integer.parseInt(tfOp2.getText());
-                if (operacion)
-                {
-                    tfResultado.setText(String.valueOf(a + b));
-                }
-                else
-                {
-                    tfResultado.setText(String.valueOf(a - b));
-                }
-                break;
-
+            tfResultado.setText(String.valueOf(operando1 + operando2));
         }
-
+        else if (rbResta.isSelected())
+        {
+            tfResultado.setText(String.valueOf(operando1 - operando2));
+        }
+        else if (rbMulti.isSelected())
+        {
+            tfResultado.setText(String.valueOf(operando1 * operando2));
+        }
+        else
+        {
+            tfResultado.setText(String.valueOf(operando1 / operando2));
+        }
     }
 
 }
